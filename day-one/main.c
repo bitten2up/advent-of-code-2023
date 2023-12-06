@@ -1,22 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-enum {
-    ONE = 'o'+'n'+'e',
-    TWO = 't'+'w'+'o',
-    THREE = 't'+'h'+'r'+'e'+'e',
-    FOUR = 'f'+'o'+'u'+'r',
-    FIVE = 'f'+'i'+'v'+'e',
-    SIX = 's'+'i'+'x',
-    SEVEN = 's'+'e'+'v'+'e'+'n',
-    EIGHT = 'e'+'i'+'g'+'h'+'t',
-    NINE = 'n'+'i'+'n'+'e'
-} dumbconversion;
+#include <stdint.h>
+#include <string.h>
 
 int main()
 {
-    printf("%i", THREE);
-    exit(0);
+    const char* ONE = "one";
+    const char* TWO = "two";
+    const char* THREE = "three";
+    const char* FOUR = "four";
+    const char* FIVE = "five";
+    const char* SIX = "six";
+    const char* SEVEN = "seven";
+    const char* EIGHT = "eight";
+    const char* NINE = "nine";
     FILE* input = fopen("test.txt", "r");
 
     fseek(input, 0L, SEEK_END);
@@ -50,19 +47,94 @@ int main()
                 start = (buffer[i] - '0')*10;
             end = buffer[i] - '0';
         }
-        if (i <= sizeof(buffer) - 3)
+        if (i <= sizeof(buffer) - 2)
         {
-            if (start == 0)
+            
+            if (strncmp(&buffer[i], ONE, 2))
             {
-                if (buffer[i] + buffer[i+1] + buffer[i+2] == ONE)
+                if (start == 0)
                 {
-
+                    start = 10;
                 }
+                end = 1;
+            }
+            //printf("%i:%i\n", buffer[i] + buffer[i+1] + buffer[i+2], TWO);
+            if (strncmp(&buffer[i], TWO, 2))
+            {
+                if (start == 0)
+                {
+                    start = 20;
+                }
+                end = 2;
+            }
+            if (strncmp(&buffer[i], SIX, 2))
+            {
+                if (start == 0)
+                {
+                    start = 60;
+                }
+                end = 6;
             }
         }
+        if (i <= sizeof(buffer) - 3)
+        {
+            if (strncmp(&buffer[i], FOUR, 3))
+            {
+                if (start == 0)
+                {
+                    start = 40;
+                }
+                end = 4;
+            }
+            if (strncmp(&buffer[i], FIVE, 3))
+            {
+                if (start == 0)
+                {
+                    start = 50;
+                }
+                end = 5;
+            }
+            if (strncmp(&buffer[i], NINE, 3))
+            {
+                if (start == 0)
+                {
+                    start = 90;
+                }
+                end = 9;
+            }
+        }
+        if (i <= sizeof(buffer) - 4)
+        {
+            //printf("test:%i:%i\n", buffer[i] + buffer[i+1] + buffer[i+2] + buffer[i+3] + buffer[i+4], THREE);
+            if (strncmp(&buffer[i], THREE, 4))
+            {
+                if (start == 0)
+                {
+                    start = 30;
+                }
+                end = 30;
+            }
+            if (strncmp(&buffer[i], SEVEN, 4))
+            {
+                if (start == 0)
+                {
+                    start = 70;
+                }
+                end = 7;
+            }
+            if (strncmp(&buffer[i], EIGHT, 4))
+            {
+                if (start == 0)
+                {
+                    start = 80;
+                }
+                end = 8;
+            }
+        }
+
         if (buffer[i] == '\n')
         {
-            //printf("%i\n", start+end);
+            printf("%i\n", start+end);
             total += start+end;
             start = 0;
             end = 0;
