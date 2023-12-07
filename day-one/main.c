@@ -47,10 +47,11 @@ int main()
                 start = (buffer[i] - '0')*10;
             end = buffer[i] - '0';
         }
-        if (i <= sizeof(buffer) - 2)
+        else {
+        if (i+2 <= inputsize)
         {
             
-            if (strncmp(&buffer[i], ONE, 2))
+            if (strncmp(&buffer[i], ONE, 3) == 0)
             {
                 if (start == 0)
                 {
@@ -59,7 +60,7 @@ int main()
                 end = 1;
             }
             //printf("%i:%i\n", buffer[i] + buffer[i+1] + buffer[i+2], TWO);
-            if (strncmp(&buffer[i], TWO, 2))
+            else if (strncmp(&buffer[i], TWO, 3) == 0)
             {
                 if (start == 0)
                 {
@@ -67,7 +68,7 @@ int main()
                 }
                 end = 2;
             }
-            if (strncmp(&buffer[i], SIX, 2))
+            else if (strncmp(&buffer[i], "six", 3) == 0)
             {
                 if (start == 0)
                 {
@@ -76,9 +77,9 @@ int main()
                 end = 6;
             }
         }
-        if (i <= sizeof(buffer) - 3)
+        if (i+3 <= inputsize)
         {
-            if (strncmp(&buffer[i], FOUR, 3))
+            if (strncmp(&buffer[i], FOUR, 3) == 0)
             {
                 if (start == 0)
                 {
@@ -86,7 +87,7 @@ int main()
                 }
                 end = 4;
             }
-            if (strncmp(&buffer[i], FIVE, 3))
+            if (strncmp(&buffer[i], FIVE, 3) == 0)
             {
                 if (start == 0)
                 {
@@ -94,7 +95,7 @@ int main()
                 }
                 end = 5;
             }
-            if (strncmp(&buffer[i], NINE, 3))
+            if (strncmp(&buffer[i], NINE, 3) == 0)
             {
                 if (start == 0)
                 {
@@ -103,18 +104,18 @@ int main()
                 end = 9;
             }
         }
-        if (i <= sizeof(buffer) - 4)
+        if (i+4 <= inputsize)
         {
             //printf("test:%i:%i\n", buffer[i] + buffer[i+1] + buffer[i+2] + buffer[i+3] + buffer[i+4], THREE);
-            if (strncmp(&buffer[i], THREE, 4))
+            if (strncmp(&buffer[i], THREE, 4) == 0)
             {
                 if (start == 0)
                 {
                     start = 30;
                 }
-                end = 30;
+                end = 3;
             }
-            if (strncmp(&buffer[i], SEVEN, 4))
+            if (strncmp(&buffer[i], SEVEN, 4) == 0)
             {
                 if (start == 0)
                 {
@@ -122,7 +123,7 @@ int main()
                 }
                 end = 7;
             }
-            if (strncmp(&buffer[i], EIGHT, 4))
+            if (strncmp(&buffer[i], EIGHT, 4) == 0)
             {
                 if (start == 0)
                 {
@@ -139,7 +140,7 @@ int main()
             start = 0;
             end = 0;
         }
-    }
+    }}
     printf("Value is: %i\n", total);
     free(buffer);
     buffer = NULL;
