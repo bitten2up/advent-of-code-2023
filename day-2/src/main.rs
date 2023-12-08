@@ -22,7 +22,7 @@ fn parse_challenge() {
     let mut counter:i32 = 0;
     for c in contents.chars()
     {
-        if (c <= '0' && c >= '9')
+        if c <= '0' && c >= '9'
         {
             counter+=1;
             println!("{}", counter);
