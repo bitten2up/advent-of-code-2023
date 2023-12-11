@@ -20,38 +20,37 @@ fn parse_challenge() {
     let mut games:i32 = 0;
     let mut status:i32 = 0; // 0 for dont parse yet
     let mut counter:i32 = 0;
-    for c in contents.chars()
+    let mut working:i32 = 0;
+    let mut red:i32 = 0;
+    let mut blue:i32 = 0;
+    let mut green:i32 = 0;
+    let mut yellow:i32 = 0;
+    let char_vec: Vec<char> = contents.chars().collect();
+    for c in contents.split_whitespace()
     {
-        if c <= '0' && c >= '9'
+        if  c.chars().nth(0).unwrap() >= '0' && c.chars().nth(0).unwrap() <= '9'
         {
-            counter+=1;
-            println!("{}", counter);
+            //println!("{}", c.parse::<i32>().unwrap());
+            match c.parse::<i32>() {
+                Ok(n) => {
+                    working = n;
+                    print!("{} ", working)
+                },
+                Err(e) => {
+                    println!();
+                    games += 1;
+                    status = 1;
+                    print!("Game {games}: ");
+                },
+            }
         }
-        // see if first char for parsing is found
-        if c == ':'
-        {
-            status = 1;
-            counter = 0;
-        }
+
         // see if second control char is found
-        if c == ';'
+        if c c.chars().nth(0).unwrap() == ';'
         {
             status = 3;
             counter = 0;
         }
-        if c == ' '
-        {
-            counter = 0;
-        }
-        if c == '\n'
-        {
-            println!("{games}");
-            games += 1;
-            status = 0;
-        }
-        if status == 1
-        {
-            counter += 1;
-        }
     }
+    println!();
 }
